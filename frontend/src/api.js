@@ -1,13 +1,11 @@
 import axios from 'axios';
 
 const api = axios.create({
-  baseURL: process.env.REACT_APP_API_BASE,
+  baseURL: 'http://localhost:5000/api',
+  withCredentials: true, // ✅ This handles cookies automatically
 });
 
-api.interceptors.request.use((config) => {
-  const token = localStorage.getItem('token');
-  if (token) config.headers.Authorization = `Bearer ${token}`;
-  return config;
-});
+// No need to manually attach token anymore
+// Remove the interceptor if you’re using HttpOnly cookie
 
 export default api;

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import './Dashboard.css';
-
+axios.defaults.withCredentials = true;
 function Dashboard() {
   const [tasks, setTasks] = useState([]);
   const [newTask, setNewTask] = useState({ title: '', description: '', dueDate: '' });
@@ -11,8 +11,7 @@ function Dashboard() {
   const tasksPerPage = 5;
   const navigate = useNavigate();
 
-  const token = localStorage.getItem('token');
-  const headers = { Authorization: `Bearer ${token}` };
+
 
   const fetchTasks = async () => {
     try {
@@ -20,7 +19,8 @@ function Dashboard() {
         view === 'overdue'
           ? 'http://localhost:5000/api/tasks/overdue'
           : 'http://localhost:5000/api/tasks';
-      const res = await axios.get(endpoint, { headers });
+      const res = await axios.get(endpoint, { withCredentials: true });
+
       setTasks(res.data);
     } catch (err) {
       console.error('Fetch tasks error:', err);
@@ -30,7 +30,7 @@ function Dashboard() {
   const handleAdd = async (e) => {
     e.preventDefault();
     try {
-      await axios.post('http://localhost:5000/api/tasks', newTask, { headers });
+      await axios.post('http://localhost:5000/api/tasks', newTask, { withCredentials: true });
       setNewTask({ title: '', description: '', dueDate: '' });
       fetchTasks();
     } catch (err) {
@@ -40,21 +40,23 @@ function Dashboard() {
 
   const markCompleted = async (id) => {
     try {
-      await axios.patch(
-        `http://localhost:5000/api/tasks/${id}`,
-        { status: 'completed' },
-        { headers }
-      );
+      await axios.patch(`http://localhost:5000/api/tasks/${id}`, { status: 'completed' }, { withCredentials: true });
       fetchTasks();
     } catch (err) {
       console.error('Mark complete error:', err);
     }
   };
 
-  const handleLogout = () => {
-    localStorage.removeItem('token');
+  const handleLogout = async () => {
+  try {
+    await axios.post('http://localhost:5000/api/auth/logout', {}, { withCredentials: true });
     navigate('/');
-  };
+  } catch (err) {
+    console.error('Logout error:', err);
+  }
+};
+
+
 
   useEffect(() => {
     fetchTasks();

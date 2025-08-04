@@ -11,16 +11,18 @@ function Login() {
   };
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      const res = await axios.post('http://localhost:5000/api/auth/login', form);
-      localStorage.setItem('token', res.data.token);
-      navigate('/dashboard');
-    } catch (err) {
-      alert('Login failed. Please check your credentials.');
-      console.error(err);
-    }
-  };
+  e.preventDefault();
+  try {
+    const res = await axios.post('http://localhost:5000/api/auth/login', form, {
+      withCredentials: true
+    });
+
+    navigate('/dashboard');
+  } catch (err) {
+    alert('Login failed. Please check your credentials.');
+    console.error(err);
+  }
+};
 
   const backgroundStyle = {
     backgroundImage: 'url("https://img.freepik.com/premium-vector/abstract-blue-white-background-poster-with-dynamic-blue-white-business-presentation-background-with-modern-technology-network-concept-vector-illustration_181182-19557.jpg")',
