@@ -26,28 +26,47 @@ JWT token + HttpOnly Cookie Authentication
 Error handling and clean code
 
 **Frontend (React)**
+
 Signup and Login pages
+
 Task dashboard with:
+
 Add new task
+
 View all/overdue tasks
+
 Pagination
+
 Mark task as completed
+
 Logout functionality
 
  **Logical Flow**
+
 Authentication Flow-------------------------------
+
 User signs up → Data saved to MongoDB (via backend API).
+
 On login → JWT is issued & stored in HttpOnly cookie.
+
 Authenticated requests automatically include the cookie for task access.
 
 **Task Management Flow**
 
 On dashboard load → /api/tasks is called with credentials.
+
 User can:
+
 Add a new task (POST /api/tasks)
+
 View overdue tasks (GET /api/tasks/overdue)
+
 Mark task copleted (PATCH /api/tasks/:id)
+
 Tasks are paginated on frontend using state-based slicing.
-Mobile-responsive and styled UI
+
+styled UI
+
+
 
 
