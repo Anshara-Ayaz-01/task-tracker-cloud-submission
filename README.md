@@ -14,10 +14,15 @@ This version is cloud-deployed, with:
 **Features**
 
 Backend (Node.js + Express + MongoDB)
+
 User Authentication (Signup/Login/Logout)
+
 Task CRUD (Create, Read, Update, Delete)
+
 Overdue task detection
+
 JWT token + HttpOnly Cookie Authentication
+
 Error handling and clean code
 
 **Frontend (React)**
@@ -44,4 +49,5 @@ View overdue tasks (GET /api/tasks/overdue)
 Mark task copleted (PATCH /api/tasks/:id)
 Tasks are paginated on frontend using state-based slicing.
 Mobile-responsive and styled UI
+
 
