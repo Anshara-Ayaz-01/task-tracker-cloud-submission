@@ -68,5 +68,16 @@ Tasks are paginated on frontend using state-based slicing.
 styled UI
 
 
+**For Login signup new user or enter existing users that is already in database**
+
+email:anu@example.com
+password:anu123
+
+email:liza@example.com
+password:liza123
+
+email:xyz@example.com
+password:xyz123
+
 
 
